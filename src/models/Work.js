@@ -1,12 +1,14 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
-import Author from "./Author";
 import Quote from "./Quote";
 
 const Work = sequelize.define(
-    'works',
+    'Works',
     {
-        title: DataTypes.TEXT,
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         year: {
             type: DataTypes.DATEONLY,
             allowNull: false
@@ -14,9 +16,9 @@ const Work = sequelize.define(
     }
 );
 
-Work.belongsTo(Author);
+Quote.belongsTo(Work);
 Work.hasMany(Quote);
 
-Work.sync();
+// Work.sync();
 
 export default Work;

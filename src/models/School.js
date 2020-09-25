@@ -1,16 +1,16 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
-import Author from "./Author";
 
 const School = sequelize.define(
-    'school',
+    'School',
     {
-        title: DataTypes.TEXT,
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     },
 );
 
-School.belongsToMany(Author, { through: 'AuthorSchools' });
-
-School.sync();
+// School.sync();
 
 export default School;

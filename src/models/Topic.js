@@ -1,16 +1,16 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
-import Quote from "./Quote";
 
 const Topic = sequelize.define(
-    'topic',
+    'Topic',
     {
-        text: DataTypes.TEXT,
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     }
 );
 
-Topic.belongsToMany(Quote, { through: 'QuoteTopics' });
-
-Topic.sync();
+// Topic.sync();
 
 export default Topic;
