@@ -1,4 +1,6 @@
 require('dotenv').config();
+
+const sequelize = require("./app/config/sequelize");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
@@ -12,14 +14,17 @@ const app = express();
 app.use(bodyParser.json());
 
 // parse requests of content-type: application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Access-Control-Allow-Origin
 app.use(cors());
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to philo api !" });
+    sequelize.authenticate()
+        .then(() => console.log('Connection has been established successfully.'))
+        .catch(e => console.error('Unable to connect to the database:', error))
+    res.json({message: "Welcome to philo api !"});
 });
 
 app.listen(`${port}`, () => {
