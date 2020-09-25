@@ -4,8 +4,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 
-const sequelize = require("./src/config/sequelize");
-
 const host = 'api.localhost';
 const port = parseInt(process.env.PORT, 10) || 5000;
 
@@ -21,15 +19,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 // simple route
-app.get("/", (req, res) => {
-    sequelize.authenticate()
-        .then(() => {
-            console.log('Connection has been established successfully.');
-        })
-        .catch(e => console.error('Unable to connect to the database:', e))
-    res.json({message: "Welcome to philo api !"});
-});
-
+app.get("/", (req, res) =>
+    res.json({message: "Welcome to philo api !"})
+);
 require("./dist/routes/author.routes.js")(app);
 
 app.listen(`${port}`, () => {

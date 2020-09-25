@@ -7,8 +7,13 @@ import Work from "./Work";
 const Author = sequelize.define(
     'Author',
     {
-        firstName: DataTypes.TEXT,
-        lastName: DataTypes.TEXT,
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName: {
+            type: DataTypes.STRING
+        },
         fullName: {
             type: DataTypes.VIRTUAL,
             get() {
@@ -18,11 +23,11 @@ const Author = sequelize.define(
                 throw new Error('Do not try to set the `fullName` value!');
             }
         },
-        date_of_birth: {
+        dateOfBirth: {
             type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        date_of_death: {
+        dateOfDeath: {
             type: DataTypes.DATEONLY,
             allowNull: true,
         }
@@ -31,8 +36,13 @@ const Author = sequelize.define(
 
 Author.hasMany(NotableIdea);
 Author.hasMany(Work);
-Author.belongsToMany(School, { through: 'AuthorSchools' });
 
-Author.sync();
+Work.belongsTo(Author);
+NotableIdea.belongsTo(Author);
+
+Author.belongsToMany(School, { through: 'AuthorSchools' });
+School.belongsToMany(Author, { through: 'AuthorSchools' });
+
+// Author.sync();
 
 export default Author;
