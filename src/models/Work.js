@@ -3,7 +3,7 @@ import sequelize from "../config/sequelize";
 import Author from "./Author";
 import Quote from "./Quote";
 
-const Works = sequelize.define(
+const Work = sequelize.define(
     'works',
     {
         title: DataTypes.TEXT,
@@ -14,9 +14,9 @@ const Works = sequelize.define(
     }
 );
 
-Works.hasOne(Author);
-Works.hasMany(Quote);
+Work.belongsTo(Author);
+Work.hasMany(Quote);
 
-Works.sync();
+Work.sync();
 
-export default Works;
+export default Work;

@@ -9,7 +9,7 @@ const School = sequelize.define(
     },
 );
 
-School.hasMany(Author)
+School.belongsToMany(Author, { through: 'AuthorSchools' });
 
 School.sync();
 

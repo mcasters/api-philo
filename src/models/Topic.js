@@ -9,7 +9,7 @@ const Topic = sequelize.define(
     }
 );
 
-Topic.hasMany(Quote);
+Topic.belongsToMany(Quote, { through: 'QuoteTopics' });
 
 Topic.sync();
 

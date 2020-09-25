@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
 import NotableIdea from "./NotableIdea";
 import School from "./School";
+import Work from "./Work";
 
 const Author = sequelize.define(
     'Author',
@@ -29,7 +30,8 @@ const Author = sequelize.define(
 );
 
 Author.hasMany(NotableIdea);
-Author.hasMany(School);
+Author.hasMany(Work);
+Author.belongsToMany(School, { through: 'AuthorSchools' });
 
 Author.sync();
 

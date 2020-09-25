@@ -7,7 +7,7 @@ const NotableIdea = sequelize.define('notable_idea', {
   text: DataTypes.TEXT,
 });
 
-NotableIdea.hasOne(Author);
+NotableIdea.belongsTo(Author);
 
 NotableIdea.sync();
 

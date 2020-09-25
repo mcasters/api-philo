@@ -30,6 +30,8 @@ app.get("/", (req, res) => {
     res.json({message: "Welcome to philo api !"});
 });
 
+require("./dist/routes/author.routes.js")(app);
+
 app.listen(`${port}`, () => {
     console.log(`Server is running on http://${host}:${port}/`);
 });
