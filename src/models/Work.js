@@ -19,6 +19,6 @@ const Work = sequelize.define(
 Quote.belongsTo(Work);
 Work.hasMany(Quote);
 
-// Work.sync();
+Work.sync();
 
 export default Work;

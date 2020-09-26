@@ -43,6 +43,6 @@ NotableIdea.belongsTo(Author);
 Author.belongsToMany(School, { through: 'AuthorSchools' });
 School.belongsToMany(Author, { through: 'AuthorSchools' });
 
-// Author.sync();
+Author.sync();
 
 export default Author;

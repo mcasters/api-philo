@@ -19,6 +19,6 @@ const Quote = sequelize.define(
 Quote.belongsToMany(Topic, { through: 'QuoteTopics' });
 Topic.belongsToMany(Quote, { through: 'QuoteTopics' });
 
-// Quote.sync();
+Quote.sync();
 
 export default Quote;

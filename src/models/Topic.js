@@ -11,6 +11,6 @@ const Topic = sequelize.define(
     }
 );
 
-// Topic.sync();
+Topic.sync();
 
 export default Topic;

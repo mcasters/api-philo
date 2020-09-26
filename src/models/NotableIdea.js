@@ -8,6 +8,6 @@ const NotableIdea = sequelize.define('NotableIdea', {
   },
 });
 
-// NotableIdea.sync();
+NotableIdea.sync();
 
 export default NotableIdea;

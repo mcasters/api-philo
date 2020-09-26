@@ -11,6 +11,6 @@ const School = sequelize.define(
     },
 );
 
-// School.sync();
+School.sync();
 
 export default School;
