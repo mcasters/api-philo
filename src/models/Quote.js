@@ -3,7 +3,7 @@ import sequelize from "../config/sequelize";
 import Topic from "./Topic";
 
 const Quote = sequelize.define(
-    'Quote',
+    'quote',
     {
         text: {
             type: DataTypes.TEXT,
@@ -16,8 +16,8 @@ const Quote = sequelize.define(
     }
 );
 
-Quote.belongsToMany(Topic, { through: 'QuoteTopics' });
-Topic.belongsToMany(Quote, { through: 'QuoteTopics' });
+Quote.belongsToMany(Topic, { through: 'quote_topics' });
+Topic.belongsToMany(Quote, { through: 'quote_topics' });
 
 Quote.sync();
 

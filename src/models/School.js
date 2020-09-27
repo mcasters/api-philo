@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
 
 const School = sequelize.define(
-    'School',
+    'school',
     {
         title: {
             type: DataTypes.STRING,

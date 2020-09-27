@@ -14,13 +14,13 @@ export const create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || `Some error occurred while creating the author."`
+                    err.message || `Some error occurred while creating the author.`
             });
         });
 };
 
 export const findAll = (req, res) => {
-    Author.findAll({order: Sequelize.col('dateOfBirth')})
+    Author.findAll({order: Sequelize.col('date_of_birth')})
         .then(authors => res.send(authors))
         .catch(err => {
             res.status(500).send({
@@ -47,16 +47,16 @@ export const findById = (req, res) => {
 };
 
 export const findByName = (req, res) => {
-    Author.findOne({where: {lastName: req.params.lastname}})
+    Author.findOne({where: {lastname: req.params.lastname}})
         .then(author => res.send(author))
         .catch(err => {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found author with lastname ${req.params.lastName}.`
+                    message: `Not found author with lastname ${req.params.lastname}.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Error retrieving author with lastname " + ${req.params.lastName}`
+                    message: `Error retrieving author with lastname " + ${req.params.lastname}`
                 });
             }
         });

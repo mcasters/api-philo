@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
 
 const Topic = sequelize.define(
-    'Topic',
+    'topic',
     {
         title: {
             type: DataTypes.STRING,

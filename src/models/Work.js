@@ -3,7 +3,7 @@ import sequelize from "../config/sequelize";
 import Quote from "./Quote";
 
 const Work = sequelize.define(
-    'Works',
+    'work',
     {
         title: {
             type: DataTypes.STRING,
@@ -16,8 +16,8 @@ const Work = sequelize.define(
     }
 );
 
+Work.hasMany(Quote, { onDelete: 'SET NULL', onUpdate: 'CASCADE' });
 Quote.belongsTo(Work);
-Work.hasMany(Quote);
 
 Work.sync();
 
