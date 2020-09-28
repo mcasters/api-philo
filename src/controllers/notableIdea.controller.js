@@ -55,12 +55,7 @@ export const findById = (req, res) => {
 };
 
 export const findByAuthor = async (req, res) => {
-    if (!req.body) {
-        res.status(400).send({
-            message: "AuthorId can not be empty!"
-        });
-    }
-    const author = await Author.findOne({where: {id: req.body.authorId}});
+    const author = await Author.findOne({where: {id: req.params.authorid}});
     if (!author) {
         res.status(404).send({
             message: `Author not found.`

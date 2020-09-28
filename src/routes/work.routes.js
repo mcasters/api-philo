@@ -12,7 +12,7 @@ module.exports = app => {
     app.get("/work/:id", workController.findById);
 
     // Retrieve works by Author id
-    app.get("/works", workController.findByAuthor);
+    app.get("/works/:authorid", workController.findByAuthor);
 
     // Update a work with id
     app.put("/work/:id", workController.update);

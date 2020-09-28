@@ -12,7 +12,7 @@ module.exports = app => {
     app.get("/notableidea/:id", notableIdeaController.findById);
 
     // Retrieve notableIdeas by author id
-    app.get("/notableideas", notableIdeaController.findByAuthor);
+    app.get("/notableideas/:authorid", notableIdeaController.findByAuthor);
 
     // Update a notableIdea with id
     app.put("/notableidea/:id", notableIdeaController.update);
