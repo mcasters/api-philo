@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 
-import NotableIdea from '../models/NotableIdea';
+import Work from '../models/Work';
 import Author from "../models/Author";
 
 export const create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({
-            message: "NotableIdea can not be empty!"
+            message: "Work can not be empty!"
         });
     }
 
@@ -16,39 +16,39 @@ export const create = async (req, res) => {
             message: `Author not found.`
         });
     } else {
-        author.createNotableIdea({title: req.body.title})
+        author.createWork({title: req.body.title})
             .then(idea => res.send(idea))
             .catch(err => {
                 res.status(500).send({
                     message:
-                        err.message || `Some error occurred while creating the notable idea.`
+                        err.message || `Some error occurred while creating the work.`
                 });
             });
     }
 };
 
 export const findAll = (req, res) => {
-    NotableIdea.findAll({order: Sequelize.col('title')})
-        .then(notableIdeas => res.send(notableIdeas))
+    Work.findAll({order: Sequelize.col('title')})
+        .then(works => res.send(works))
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || `Some error occurred while retrieving notableIdeas.`
+                    err.message || `Some error occurred while retrieving works.`
             });
         })
 };
 
 export const findById = (req, res) => {
-    NotableIdea.findOne({where: {id: req.params.id}})
-        .then(notableIdea => res.send(notableIdea))
+    Work.findOne({where: {id: req.params.id}})
+        .then(work => res.send(work))
         .catch(err => {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found notableIdea with id ${req.params.id}.`
+                    message: `Not found work with id ${req.params.id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Error retrieving notableIdea with id " + ${req.params.id}`
+                    message: `Error retrieving work with id " + ${req.params.id}`
                 });
             }
         });
@@ -67,15 +67,15 @@ export const findByAuthor = async (req, res) => {
         });
     } else {
         author.getNotableIdeas()
-            .then(notableIdeas => res.send(notableIdeas))
+            .then(works => res.send(works))
             .catch(err => {
                 if (err.kind === "not_found") {
                     res.status(404).send({
-                        message: `Not found notableIdea.`
+                        message: `Not found work.`
                     });
                 } else {
                     res.status(500).send({
-                        message: `Error retrieving notableIdea.`
+                        message: `Error retrieving work.`
                     });
                 }
             });
@@ -85,39 +85,39 @@ export const findByAuthor = async (req, res) => {
 export const update = (req, res) => {
     if (!req.body) {
         res.status(400).send({
-            message: "NotableIdea can not be empty!"
+            message: "Work can not be empty!"
         });
     }
 
-    NotableIdea.update(req.body, {where: {id: req.params.id}})
+    Work.update(req.body, {where: {id: req.params.id}})
         .then(() => {
-            NotableIdea.findOne({where: {id: req.params.id}})
-                .then(notableIdea => res.send(notableIdea))
+            Work.findOne({where: {id: req.params.id}})
+                .then(work => res.send(work))
         })
         .catch(err => {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found notableIdea.`
+                    message: `Not found work.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Error updating notableIdea`
+                    message: `Error updating work`
                 });
             }
         })
 };
 
 export const deleteOne = (req, res) => {
-    NotableIdea.destroy({where: {id: req.params.id}})
-        .then(() => res.send({message: `NotableIdea was deleted successfully!`}))
+    Work.destroy({where: {id: req.params.id}})
+        .then(() => res.send({message: `Work was deleted successfully!`}))
         .catch(err => {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found notableIdea.`
+                    message: `Not found work.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Could not delete notableIdea`
+                    message: `Could not delete work`
                 });
             }
         });
