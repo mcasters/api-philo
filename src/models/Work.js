@@ -10,7 +10,7 @@ const Work = sequelize.define(
             allowNull: false
         },
         year: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
     }

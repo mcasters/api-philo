@@ -16,8 +16,8 @@ export const create = async (req, res) => {
             message: `Author not found.`
         });
     } else {
-        author.createWork({title: req.body.title})
-            .then(idea => res.send(idea))
+        author.createWork({title: req.body.title, year: req.body.year })
+            .then(work => res.send(work))
             .catch(err => {
                 res.status(500).send({
                     message:

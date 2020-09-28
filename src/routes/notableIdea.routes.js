@@ -3,20 +3,20 @@ import * as notableIdeaController from "../controllers/notableIdea.controller.js
 module.exports = app => {
 
     // Create a new notableIdea
-    app.post("/notableideas", notableIdeaController.create);
+    app.post("/notableidea", notableIdeaController.create);
 
     // Retrieve all notableideas
     app.get("/notableideas", notableIdeaController.findAll);
 
     // Retrieve a single notableIdea with id
-    app.get("/notableideas/:id", notableIdeaController.findById);
+    app.get("/notableidea/:id", notableIdeaController.findById);
 
-    // Retrieve a single notableIdea with lastname
-    app.get("/notableideas", notableIdeaController.findByAuthor);
+    // Retrieve notableIdeas by author id
+    app.get("/notableidea", notableIdeaController.findByAuthor);
 
     // Update a notableIdea with id
-    app.put("/notableideas/:id", notableIdeaController.update);
+    app.put("/notableidea/:id", notableIdeaController.update);
 
     // Delete a notableIdea with id
-    app.delete("/notableideas/:id", notableIdeaController.deleteOne);
+    app.delete("/notableidea/:id", notableIdeaController.deleteOne);
 };
