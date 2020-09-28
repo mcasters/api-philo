@@ -9,9 +9,9 @@ const Quote = sequelize.define(
             type: DataTypes.TEXT,
             allowNull: false
         },
-        year: {
-            type: DataTypes.DATEONLY,
-            allowNull: false
+        part: {
+            type: DataTypes.TEXT,
+            allowNull: true
         },
     }
 );

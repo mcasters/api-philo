@@ -66,7 +66,7 @@ export const findByAuthor = async (req, res) => {
             message: `Author not found.`
         });
     } else {
-        author.getNotableIdeas()
+        author.getWorks()
             .then(works => res.send(works))
             .catch(err => {
                 if (err.kind === "not_found") {
