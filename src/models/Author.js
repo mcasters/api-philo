@@ -23,7 +23,7 @@ const Author = sequelize.define(
                 throw new Error('Do not try to set the `fullname` value!');
             }
         },
-        date_of_Birth: {
+        date_of_birth: {
             type: DataTypes.DATEONLY,
             allowNull: false,
         },
