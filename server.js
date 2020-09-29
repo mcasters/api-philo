@@ -40,6 +40,7 @@ require("./dist/routes/author.routes.js")(app);
 require("./dist/routes/notableIdea.routes.js")(app);
 require("./dist/routes/work.routes.js")(app);
 require("./dist/routes/quote.routes.js")(app);
+require("./dist/routes/school.routes.js")(app);
 
 app.listen(`${port}`, () => {
     console.log(`Server is running on http://${host}:${port}/`);
