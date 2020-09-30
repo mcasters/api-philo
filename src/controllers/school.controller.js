@@ -40,8 +40,8 @@ export const setOrCreateByAuthor = async (req, res) => {
         }
     }
 
-    author.setSchools([school])
-        .then(schools => res.send(schools))
+    author.addSchool(school)
+        .then(() => res.send(school))
         .catch(err => {
             res.status(500).send({
                 message: err.message || `Error associated school to author.`
