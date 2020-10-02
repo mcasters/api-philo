@@ -104,6 +104,3 @@ dist
 
 # WebStorm
 .idea
-
-# test file
-src/config/test-ddb.sql

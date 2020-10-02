@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
 import Quote from "./Quote";
+import ReadingSheet from "./ReadingSheet";
 
 const Work = sequelize.define(
     'work',
@@ -16,8 +17,8 @@ const Work = sequelize.define(
     }
 );
 
-Work.hasMany(Quote, { onDelete: 'SET NULL', onUpdate: 'CASCADE' });
-Quote.belongsTo(Work);
+Work.hasOne(ReadingSheet, { onDelete: 'SET NULL', onUpdate: 'CASCADE' });
+ReadingSheet.belongsTo(Work);
 
 Work.sync();
 
