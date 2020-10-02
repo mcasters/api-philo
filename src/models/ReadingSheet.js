@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../config/sequelize";
 import Quote from "./Quote";
-import Work from "./Work";
 
 const ReadingSheet = sequelize.define(
     'readingsheet',
