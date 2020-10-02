@@ -1,4 +1,5 @@
 import * as authorController from "../controllers/author.controller.js";
+import * as quoteController from "../controllers/quote.controller";
 
 module.exports = app => {
 
@@ -10,6 +11,9 @@ module.exports = app => {
 
     // Retrieve a single Content with id
     app.get("/author/:id", authorController.findById);
+
+    // Retrieve author by school id
+    app.get("/authors-by-school/:schoolid", authorController.findBySchool);
 
     // Retrieve a single Content with lastname
     app.get("/author", authorController.findByName);

@@ -55,6 +55,29 @@ export const findById = (req, res) => {
         });
 };
 
+export const findBySchool = async (req, res) => {
+    const school = await School.findOne({where: {id: req.params.schoolid}});
+    if (!school) {
+        res.status(404).send({
+            message: `School not found.`
+        });
+    } else {
+        school.getAuthors({ include: [School, Work, NotableIdea] })
+            .then(authors => res.send(authors))
+            .catch(err => {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Authors Not found.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: `Error retrieving authors.`
+                    });
+                }
+            });
+    }
+};
+
 export const findByName = (req, res) => {
     if (!req.body) {
         res.status(400).send({
