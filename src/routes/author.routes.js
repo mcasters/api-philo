@@ -17,6 +17,9 @@ module.exports = app => {
     // Update a Content with id
     app.put("/authors/:id", authorController.update);
 
+    // Remove a school from an author
+    app.put("/author-remove-school/:id", authorController.removeSchool);
+
     // Delete a Content with id
     app.delete("/authors/:id", authorController.deleteOne);
 };

@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 
 import Author from '../models/Author';
+import Quote from "../models/Quote";
 
 export const create = (req, res) => {
     if (!req.body) {
@@ -85,6 +86,30 @@ export const update = (req, res) => {
                 });
             }
         })
+};
+
+export const removeSchool = async (req, res) => {
+    if (!req.body)
+        res.status(400).send({message: "Schoolid can not be empty!"});
+
+    const author = await Author.findOne({where: {id: req.params.id}});
+    if (!author)
+        res.status(400).send({message: "Author not found"});
+
+    const schoolToRemove = await author.getSchools({where: {id: req.body.schoolid}})
+    author.removeSchool(schoolToRemove)
+        .then(() => res.send({message: `School was removed successfully!`}))
+        .catch(err =>{
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `School not found.`
+                });
+            } else {
+                res.status(500).send({
+                    message: err.message || `Could not remove school`
+                });
+            }
+        });
 };
 
 export const deleteOne = (req, res) => {

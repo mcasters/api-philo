@@ -135,8 +135,8 @@ export const removeTopic = async (req, res) => {
     if (!quote)
         res.status(400).send({message: "Quote not found"});
 
-    const topicToDelete = await quote.getTopics({where: {id: req.body.topicid}})
-    quote.removeTopic(topicToDelete)
+    const topicToRemove = await quote.getTopics({where: {id: req.body.topicid}})
+    quote.removeTopic(topicToRemove)
         .then(() => res.send({message: `Topic was removed successfully!`}))
         .catch(err =>{
             if (err.kind === "not_found") {
