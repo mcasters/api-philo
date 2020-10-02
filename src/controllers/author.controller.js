@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize';
 
 import Author from '../models/Author';
-import Quote from "../models/Quote";
+import School from "../models/School";
+import NotableIdea from "../models/NotableIdea";
+import Work from "../models/Work";
 
 export const create = (req, res) => {
     if (!req.body) {
@@ -21,7 +23,10 @@ export const create = (req, res) => {
 };
 
 export const findAll = (req, res) => {
-    Author.findAll({order: Sequelize.col('date_of_birth')})
+    Author.findAll({
+        order: Sequelize.col('date_of_birth'),
+        include: [School, Work, NotableIdea],
+    })
         .then(authors => res.send(authors))
         .catch(err => {
             res.status(500).send({
@@ -32,7 +37,10 @@ export const findAll = (req, res) => {
 };
 
 export const findById = (req, res) => {
-    Author.findOne({where: {id: req.params.id}})
+    Author.findOne({
+        where: {id: req.params.id},
+        include: [School, Work, NotableIdea],
+    })
         .then(author => res.send(author))
         .catch(err => {
             if (err.kind === "not_found") {
@@ -48,7 +56,16 @@ export const findById = (req, res) => {
 };
 
 export const findByName = (req, res) => {
-    Author.findOne({where: {lastname: req.params.lastname}})
+    if (!req.body) {
+        res.status(400).send({
+            message: "Author name can not be empty!"
+        });
+    }
+
+    Author.findOne({
+        where: {lastname: `${req.body.lastname}`},
+        include: [School, Work, NotableIdea],
+    })
         .then(author => res.send(author))
         .catch(err => {
             if (err.kind === "not_found") {
@@ -99,7 +116,7 @@ export const removeSchool = async (req, res) => {
     const schoolToRemove = await author.getSchools({where: {id: req.body.schoolid}})
     author.removeSchool(schoolToRemove)
         .then(() => res.send({message: `School was removed successfully!`}))
-        .catch(err =>{
+        .catch(err => {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     message: `School not found.`

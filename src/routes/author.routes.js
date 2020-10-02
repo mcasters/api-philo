@@ -9,10 +9,10 @@ module.exports = app => {
     app.get("/authors", authorController.findAll);
 
     // Retrieve a single Content with id
-    app.get("/authors/:id", authorController.findById);
+    app.get("/author/:id", authorController.findById);
 
     // Retrieve a single Content with lastname
-    app.get("/authors/:lastname", authorController.findByName);
+    app.get("/author", authorController.findByName);
 
     // Update a Content with id
     app.put("/authors/:id", authorController.update);
