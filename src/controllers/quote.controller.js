@@ -11,7 +11,7 @@ export const create = async (req, res) => {
         });
     }
 
-    const work = await Work.findOne({where: {id: req.body.workId}});
+    const work = await Work.findOne({where: {id: req.body.workid}});
     if (!work) {
         res.status(404).send({
             message: `Work not found.`

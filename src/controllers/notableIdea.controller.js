@@ -10,7 +10,7 @@ export const create = async (req, res) => {
         });
     }
 
-    const author = await Author.findOne({where: {id: req.body.authorId}});
+    const author = await Author.findOne({where: {id: req.body.authorid}});
     if (!author) {
         res.status(404).send({
             message: `Author not found.`
