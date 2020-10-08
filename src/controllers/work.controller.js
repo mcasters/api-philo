@@ -2,6 +2,7 @@ import Sequelize from 'sequelize';
 
 import Work from '../models/Work';
 import Author from "../models/Author";
+import ReadingSheet from "../models/ReadingSheet";
 
 export const create = async (req, res) => {
     if (!req.body) {
@@ -28,7 +29,10 @@ export const create = async (req, res) => {
 };
 
 export const findAll = (req, res) => {
-    Work.findAll({order: Sequelize.col('title')})
+    Work.findAll({
+        order: Sequelize.col('title'),
+        include: [ReadingSheet],
+    })
         .then(works => res.send(works))
         .catch(err => {
             res.status(500).send({
@@ -39,7 +43,10 @@ export const findAll = (req, res) => {
 };
 
 export const findById = (req, res) => {
-    Work.findOne({where: {id: req.params.id}})
+    Work.findOne({
+        where: {id: req.params.id},
+        include: [ReadingSheet],
+    })
         .then(work => res.send(work))
         .catch(err => {
             if (err.kind === "not_found") {
@@ -61,7 +68,7 @@ export const findByAuthor = async (req, res) => {
             message: `Author not found.`
         });
     } else {
-        author.getWorks()
+        author.getWorks({include: [ReadingSheet]})
             .then(works => res.send(works))
             .catch(err => {
                 if (err.kind === "not_found") {
